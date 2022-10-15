@@ -1,10 +1,13 @@
 :root{
   --red: #f54e4e;
   --green: #4aec8c;
+  --blue: rgb(64, 163, 255);
+  --yellow: rgb(255, 255, 106);
+  --main-color: #30384b;
 }
 
 body{
-  background-color: #30384b;
+  background-color: var(--main-color);
   color: #eee;
 }
 main{
@@ -12,6 +15,27 @@ main{
   max-width: 340px;
   margin: 0 auto;
   text-align: center;
+
+}
+
+.flex{
+  display: flex;
+  padding: 2rem 0;
+  align-items: center;
+}
+
+.auto-start{
+  flex-direction: row-reverse;
+  justify-content: start;
+  gap: 1rem;
+}
+
+.auto-start label{
+  margin: 0px;
+}
+
+.settings-btn-container{
+  justify-content: space-between;
 }
 
 button{
@@ -23,18 +47,27 @@ button{
   cursor: pointer;
 }
 
-button.with-text{
-  width: auto;
-  background-color:rgba(255,255,255,0.1);
-  border-radius:10px;
-  padding: 10px 20px;
-  font-size: 1.4rem;
-  line-height: 36px;
+button.settingsButton{
+  margin-bottom: 2rem;
 }
-button.with-text svg{
-  width: 36px;
+
+button.settingsButton svg{
+  width: 3rem;
   float:left;
-  margin-right: 5px;
+}
+
+button.btn-with-text{
+  font-size: 1rem;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.685);
+  border-radius: 10px;
+  padding: 0.5rem 0;
+  transition: all .2s ease;
+}
+
+button.btn-with-text:hover{
+  background-color: rgba(255, 255, 255, 0.685);
+  color: var(--main-color)
 }
 
 label{
@@ -42,4 +75,14 @@ label{
   margin-bottom: 10px;
   margin-top: 20px;
   text-transform: capitalize;
+}
+
+.settingsContainer{
+  display: flex;
+  justify-content: space-between;
+}
+
+h1{
+  font-size: 1rem;
+  text-align: left;
 }
