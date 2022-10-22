@@ -3,6 +3,8 @@ import "react-circular-progressbar/dist/styles.css";
 import PlayButton from "./PlayButton";
 import PauseButton from "./PauseButton";
 import SettingsButton from "./SettingsButton";
+import ResetButton from "./ResetButton";
+import LongBreakIndicator from "./BreakIntervalsIndicator";
 import { useContext, useState, useEffect, useRef } from "react";
 import SettingsContext from "./SettingsContext";
 
@@ -11,11 +13,11 @@ const green = "#4aec8c";
 
 function Timer() {
   const settingsInfo = useContext(SettingsContext);
-
+  const [reset, setReset] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
   const [mode, setMode] = useState("work"); // work/break/null
   const [secondsLeft, setSecondsLeft] = useState(0);
-
+  //const [breakIntervalsDone, setBreakIntervalsDone] = useState(0); // filled yellow indicators
   const secondsLeftRef = useRef(secondsLeft);
   const isPausedRef = useRef(isPaused);
   const modeRef = useRef(mode);
@@ -69,18 +71,25 @@ function Timer() {
 
   return (
     <div>
-      <div className="settingsContainer">
-        <SettingsButton onClick={() => settingsInfo.setShowSettings(true)} />
+      <div className="settings-container">
+        <SettingsButton
+          className="settings-btn"
+          onClick={() => settingsInfo.setShowSettings(true)}
+        />
+        <ResetButton className="reset-btn" onClick={() => setReset(true)} />
       </div>
-      <CircularProgressbar
-        value={percentage}
-        text={minutes + ":" + seconds}
-        styles={buildStyles({
-          textColor: "#fff",
-          pathColor: mode === "work" ? red : green,
-          tailColor: "rgba(255,255,255,.2)",
-        })}
-      />
+      <div className="CircularProgressbar">
+        <CircularProgressbar
+          value={percentage}
+          text={minutes + ":" + seconds}
+          styles={buildStyles({
+            textColor: "#fff",
+            pathColor: mode === "work" ? red : green,
+            tailColor: "rgba(255,255,255,.2)",
+          })}
+        />
+        <LongBreakIndicator breakIntervalsDone setBreakIntervalsDone />
+      </div>
       <div style={{ marginTop: "20px" }}>
         {isPaused ? (
           <PlayButton

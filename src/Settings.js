@@ -1,13 +1,18 @@
 import ReactSlider from "react-slider";
 import "./slider.css";
 import SettingsContext from "./SettingsContext";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState, useRef, useMemo } from "react";
 import BackButton from "./BackButton";
+import ReactSliderComponent from "./ReactSliderComponent";
 
 function Settings() {
   const settingsInfo = useContext(SettingsContext);
-  //const [apply, setApply] = useState(false);
+  const workMinutesRef = useRef(settingsInfo.workMinutes);
 
+  /* const breakMinutesRef = useRef(settingsInfo.breakMinutes);
+  const longBreakMinutesRef = useRef(settingsInfo.longBreakMinutes);
+  const breakIntervalsRef = useRef(settingsInfo.breakIntervals);
+  const autoStartRef = useRef(settingsInfo.autoStart); */
   const [tempWorkMinutes, setTempWorkMinutes] = useState(
     settingsInfo.workMinutes
   );
@@ -28,22 +33,44 @@ function Settings() {
     setTempLongBreakMinutes(settingsInfo.initialStates.longBreakMinutes);
     setTempBreakIntervals(settingsInfo.initialStates.breakIntervals);
     setTempAutoStart(settingsInfo.initialStates.autoStart);
+    /*     workMinutesRef.current = settingsInfo.initialStates.workMinutes;
+    breakMinutesRef.current = settingsInfo.initialStates.breakMinutes;
+    longBreakMinutesRef.current = settingsInfo.initialStates.longBreakMinutes;
+    breakIntervalsRef.current = settingsInfo.initialStates.breakIntervals;
+    autoStartRef.current = settingsInfo.initialStates.autoStart; */
   }
 
   function applyBtn() {
-    settingsInfo.setWorkMinutes(tempWorkMinutes);
+    settingsInfo.setWorkMinutes(workMinutesRef.current);
+    //settingsInfo.setWorkMinutes(tempWorkMinutes);
     settingsInfo.setBreakMinutes(tempBreakMinutes);
     settingsInfo.setLongBreakMinutes(tempLongBreakMinutes);
     settingsInfo.setBreakIntervals(tempBreakIntervals);
     settingsInfo.setAutoStart(tempAutoStart);
+
+    /*     settingsInfo.setWorkMinutes(workMinutesRef);
+    settingsInfo.setBreakMinutes(breakMinutesRef);
+    settingsInfo.setLongBreakMinutes(longBreakMinutesRef);
+    settingsInfo.setBreakIntervals(breakIntervalsRef);
+    settingsInfo.setAutoStart(tempAutoStart); */
+    settingsInfo.setShowSettings(false);
   }
+  useEffect(() => {
+    console.log("rendered the element");
+    //console.log(workMinutesRef);
+  });
 
   return (
     <div style={{ textAlign: "left" }}>
       <div>
         <BackButton onClick={() => settingsInfo.setShowSettings(false)} />
       </div>
-      <label>work: {tempWorkMinutes}:00</label>
+      <ReactSliderComponent
+        value={workMinutesRef.current}
+        setValue={(e) => (workMinutesRef.current = e)}
+        color=""
+      />
+      {/*       <label>work: {tempWorkMinutes}:00</label>
       <ReactSlider
         className={"slider"}
         thumbClassName={"thumb"}
@@ -52,7 +79,7 @@ function Settings() {
         onChange={(newValue) => setTempWorkMinutes(newValue)}
         min={1}
         max={120}
-      />
+      /> */}
       <label>break: {tempBreakMinutes}:00</label>
       <ReactSlider
         className={"slider green"}
@@ -92,10 +119,20 @@ function Settings() {
         />
       </div>
       <div className="flex settings-btn-container">
-        <button className="btn-with-text" onClick={resetBtn}>
+        <button
+          className="btn-with-text"
+          onClick={() => {
+            resetBtn();
+          }}
+        >
           Reset
         </button>
-        <button className="btn-with-text" onClick={applyBtn()}>
+        <button
+          className="btn-with-text"
+          onClick={() => {
+            applyBtn();
+          }}
+        >
           Apply
         </button>
       </div>

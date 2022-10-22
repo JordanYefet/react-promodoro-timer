@@ -47,13 +47,15 @@ button{
   cursor: pointer;
 }
 
-button.settingsButton{
-  margin-bottom: 2rem;
+.settingsButton{
+  width: 3rem;
+  height: 3rem;
 }
 
-button.settingsButton svg{
-  width: 3rem;
-  float:left;
+.resetButton{
+  width: 2.5rem;
+  height: 2.5rem;
+  padding-top: 7px;
 }
 
 button.btn-with-text{
@@ -62,7 +64,12 @@ button.btn-with-text{
   border: 1px solid rgba(255, 255, 255, 0.685);
   border-radius: 10px;
   padding: 0.5rem 0;
-  transition: all .2s ease;
+  transition-property: background-color,color;
+  transition-duration: 100ms;
+  transition-timing-function: linear;
+  -webkit-transition-property: background-color,color;
+  -webkit-transition-duration: 100ms;
+  -webkit-transition-timing-function: linear;
 }
 
 button.btn-with-text:hover{
@@ -77,12 +84,26 @@ label{
   text-transform: capitalize;
 }
 
-.settingsContainer{
+.settings-container{
   display: flex;
   justify-content: space-between;
+  margin-bottom: 2rem;
 }
 
 h1{
   font-size: 1rem;
   text-align: left;
+}
+
+.flex.breakIntervalsIndicatorContainer{
+  justify-content: center;
+  gap: .5rem;
+}
+
+.breakIntervalsIndicator{
+  width: .75rem;
+  height: .75rem;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid var(--yellow);
 }
