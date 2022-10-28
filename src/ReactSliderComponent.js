@@ -1,12 +1,14 @@
 import ReactSlider from "react-slider";
-import { useState } from "react";
+import React, { useState } from "react";
 
-function ReactSliderComponent(props) {
+//function ReactSliderComponent(props) {
+export const ReactSliderComponent = React.memo((props) => {
   const [value, setValue] = useState(props.value);
 
   function handleChange(e) {
     setValue(e);
     props.setValue(e);
+    //settingsInfo.setWorkMinutes(e);
   }
 
   return (
@@ -18,11 +20,11 @@ function ReactSliderComponent(props) {
         trackClassName={"track"}
         value={value}
         onChange={(e) => handleChange(e)}
-        min={1}
-        max={120}
+        min={props.min}
+        max={props.max}
       />
     </>
   );
-}
+});
 
 export default ReactSliderComponent;

@@ -1,63 +1,46 @@
 import ReactSlider from "react-slider";
 import "./slider.css";
 import SettingsContext from "./SettingsContext";
-import { useContext, useEffect, useState, useRef, useMemo } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import BackButton from "./BackButton";
 import ReactSliderComponent from "./ReactSliderComponent";
 
 function Settings() {
   const settingsInfo = useContext(SettingsContext);
-  const workMinutesRef = useRef(settingsInfo.workMinutes);
 
-  /* const breakMinutesRef = useRef(settingsInfo.breakMinutes);
+  const workMinutesRef = useRef(settingsInfo.workMinutes);
+  const breakMinutesRef = useRef(settingsInfo.breakMinutes);
   const longBreakMinutesRef = useRef(settingsInfo.longBreakMinutes);
   const breakIntervalsRef = useRef(settingsInfo.breakIntervals);
-  const autoStartRef = useRef(settingsInfo.autoStart); */
-  const [tempWorkMinutes, setTempWorkMinutes] = useState(
-    settingsInfo.workMinutes
-  );
-  const [tempBreakMinutes, setTempBreakMinutes] = useState(
-    settingsInfo.breakMinutes
-  );
-  const [tempLongBreakMinutes, setTempLongBreakMinutes] = useState(
-    settingsInfo.longBreakMinutes
-  );
-  const [tempBreakIntervals, setTempBreakIntervals] = useState(
-    settingsInfo.breakIntervals
-  );
-  const [tempAutoStart, setTempAutoStart] = useState(settingsInfo.autoStart);
+  //const autoStartRef = useRef(settingsInfo.autoStart);
+
+  const [autoStart, setAutoStart] = useState(settingsInfo.autoStart);
 
   function resetBtn() {
-    setTempWorkMinutes(settingsInfo.initialStates.workMinutes);
-    setTempBreakMinutes(settingsInfo.initialStates.breakMinutes);
-    setTempLongBreakMinutes(settingsInfo.initialStates.longBreakMinutes);
-    setTempBreakIntervals(settingsInfo.initialStates.breakIntervals);
-    setTempAutoStart(settingsInfo.initialStates.autoStart);
-    /*     workMinutesRef.current = settingsInfo.initialStates.workMinutes;
-    breakMinutesRef.current = settingsInfo.initialStates.breakMinutes;
-    longBreakMinutesRef.current = settingsInfo.initialStates.longBreakMinutes;
-    breakIntervalsRef.current = settingsInfo.initialStates.breakIntervals;
-    autoStartRef.current = settingsInfo.initialStates.autoStart; */
+    settingsInfo.setWorkMinutes(settingsInfo.initialStates.workMinutes);
+    settingsInfo.setBreakMinutes(settingsInfo.initialStates.breakMinutes);
+    settingsInfo.setLongBreakMinutes(
+      settingsInfo.initialStates.longBreakMinutes
+    );
+    settingsInfo.setBreakIntervals(settingsInfo.initialStates.breakIntervals);
+    settingsInfo.setAutoStart(settingsInfo.initialStates.autoStart);
+    //setReset(true);
+
+    settingsInfo.setShowSettings(false);
   }
 
   function applyBtn() {
     settingsInfo.setWorkMinutes(workMinutesRef.current);
-    //settingsInfo.setWorkMinutes(tempWorkMinutes);
-    settingsInfo.setBreakMinutes(tempBreakMinutes);
-    settingsInfo.setLongBreakMinutes(tempLongBreakMinutes);
-    settingsInfo.setBreakIntervals(tempBreakIntervals);
-    settingsInfo.setAutoStart(tempAutoStart);
+    settingsInfo.setBreakMinutes(breakMinutesRef.current);
+    settingsInfo.setLongBreakMinutes(longBreakMinutesRef.current);
+    settingsInfo.setBreakIntervals(breakIntervalsRef.current);
+    settingsInfo.setAutoStart(autoStart);
 
-    /*     settingsInfo.setWorkMinutes(workMinutesRef);
-    settingsInfo.setBreakMinutes(breakMinutesRef);
-    settingsInfo.setLongBreakMinutes(longBreakMinutesRef);
-    settingsInfo.setBreakIntervals(breakIntervalsRef);
-    settingsInfo.setAutoStart(tempAutoStart); */
     settingsInfo.setShowSettings(false);
   }
+
   useEffect(() => {
-    console.log("rendered the element");
-    //console.log(workMinutesRef);
+    console.log("re-rendered");
   });
 
   return (
@@ -67,46 +50,37 @@ function Settings() {
       </div>
       <ReactSliderComponent
         value={workMinutesRef.current}
-        setValue={(e) => (workMinutesRef.current = e)}
+        setValue={(e) => {
+          workMinutesRef.current = e;
+        }}
         color=""
-      />
-      {/*       <label>work: {tempWorkMinutes}:00</label>
-      <ReactSlider
-        className={"slider"}
-        thumbClassName={"thumb"}
-        trackClassName={"track"}
-        value={tempWorkMinutes}
-        onChange={(newValue) => setTempWorkMinutes(newValue)}
-        min={1}
-        max={120}
-      /> */}
-      <label>break: {tempBreakMinutes}:00</label>
-      <ReactSlider
-        className={"slider green"}
-        thumbClassName={"thumb"}
-        trackClassName={"track"}
-        value={tempBreakMinutes}
-        onChange={(newValue) => setTempBreakMinutes(newValue)}
         min={1}
         max={120}
       />
-      <label>long break: {tempLongBreakMinutes}:00</label>
-      <ReactSlider
-        className={"slider blue"}
-        thumbClassName={"thumb"}
-        trackClassName={"track"}
-        value={tempLongBreakMinutes}
-        onChange={(newValue) => setTempLongBreakMinutes(newValue)}
+      <ReactSliderComponent
+        value={breakMinutesRef.current}
+        setValue={(e) => {
+          breakMinutesRef.current = e;
+        }}
+        color="green"
         min={1}
         max={120}
       />
-      <label>break intervals: {tempBreakIntervals}</label>
-      <ReactSlider
-        className={"slider yellow"}
-        thumbClassName={"thumb"}
-        trackClassName={"track"}
-        value={tempBreakIntervals}
-        onChange={(newValue) => setTempBreakIntervals(newValue)}
+      <ReactSliderComponent
+        value={longBreakMinutesRef.current}
+        setValue={(e) => {
+          longBreakMinutesRef.current = e;
+        }}
+        color="blue"
+        min={1}
+        max={120}
+      />
+      <ReactSliderComponent
+        value={breakIntervalsRef.current}
+        setValue={(e) => {
+          breakIntervalsRef.current = e;
+        }}
+        color="yellow"
         min={1}
         max={5}
       />
@@ -114,25 +88,15 @@ function Settings() {
         <label>Auto break start?</label>
         <input
           type="checkbox"
-          checked={tempAutoStart}
-          onChange={() => setTempAutoStart(!tempAutoStart)}
+          checked={autoStart}
+          onChange={() => setAutoStart(!autoStart)}
         />
       </div>
       <div className="flex settings-btn-container">
-        <button
-          className="btn-with-text"
-          onClick={() => {
-            resetBtn();
-          }}
-        >
+        <button className="btn-with-text" onClick={resetBtn}>
           Reset
         </button>
-        <button
-          className="btn-with-text"
-          onClick={() => {
-            applyBtn();
-          }}
-        >
+        <button className="btn-with-text" onClick={applyBtn}>
           Apply
         </button>
       </div>
