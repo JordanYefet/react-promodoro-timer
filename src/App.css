@@ -106,4 +106,10 @@ h1{
   border-radius: 50%;
   background-color: transparent;
   border: 2px solid var(--yellow);
+
+}
+
+.breakIntervalsIndicatorFinished{
+  background-color: var(--yellow);
+
 }

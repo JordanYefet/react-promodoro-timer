@@ -7,13 +7,14 @@ import ResetButton from "./ResetButton";
 import LongBreakIndicator from "./BreakIntervalsIndicator";
 import { useContext, useState, useEffect, useRef } from "react";
 import SettingsContext from "./SettingsContext";
+import { Link } from "react-router-dom";
 
 const red = "#f54e4e";
 const green = "#4aec8c";
 
 function Timer() {
   const settingsInfo = useContext(SettingsContext);
-  const [reset, setReset] = useState(false);
+  const [restart, setRestart] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
   const [mode, setMode] = useState("work"); // work/break/null
   const [secondsLeft, setSecondsLeft] = useState(0);
@@ -72,11 +73,13 @@ function Timer() {
   return (
     <div>
       <div className="settings-container">
-        <SettingsButton
-          className="settings-btn"
-          onClick={() => settingsInfo.setShowSettings(true)}
-        />
-        <ResetButton className="reset-btn" onClick={() => setReset(true)} />
+        <Link to="/settings">
+          <SettingsButton
+            className="settings-btn"
+            onClick={() => settingsInfo.setShowSettings(true)}
+          />
+        </Link>
+        <ResetButton className="restart-btn" onClick={() => setRestart(true)} />
       </div>
       <div className="CircularProgressbar">
         <CircularProgressbar

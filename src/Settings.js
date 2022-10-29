@@ -1,19 +1,17 @@
-import ReactSlider from "react-slider";
 import "./slider.css";
 import SettingsContext from "./SettingsContext";
 import React, { useContext, useState, useRef, useEffect } from "react";
 import BackButton from "./BackButton";
 import ReactSliderComponent from "./ReactSliderComponent";
+import { Link } from "react-router-dom";
 
 function Settings() {
   const settingsInfo = useContext(SettingsContext);
-
+  const [reset, setReset] = useState(false);
   const workMinutesRef = useRef(settingsInfo.workMinutes);
   const breakMinutesRef = useRef(settingsInfo.breakMinutes);
   const longBreakMinutesRef = useRef(settingsInfo.longBreakMinutes);
   const breakIntervalsRef = useRef(settingsInfo.breakIntervals);
-  //const autoStartRef = useRef(settingsInfo.autoStart);
-
   const [autoStart, setAutoStart] = useState(settingsInfo.autoStart);
 
   function resetBtn() {
@@ -24,9 +22,13 @@ function Settings() {
     );
     settingsInfo.setBreakIntervals(settingsInfo.initialStates.breakIntervals);
     settingsInfo.setAutoStart(settingsInfo.initialStates.autoStart);
-    //setReset(true);
+    workMinutesRef.current = settingsInfo.initialStates.workMinutes;
+    breakMinutesRef.current = settingsInfo.initialStates.breakMinutes;
+    longBreakMinutesRef.current = settingsInfo.initialStates.longBreakMinutes;
+    breakIntervalsRef.current = settingsInfo.initialStates.breakIntervals;
 
-    settingsInfo.setShowSettings(false);
+    //For remounting the component without actually refreshing the page (without using states)
+    settingsInfo.setKey(Math.random);
   }
 
   function applyBtn() {
@@ -36,18 +38,19 @@ function Settings() {
     settingsInfo.setBreakIntervals(breakIntervalsRef.current);
     settingsInfo.setAutoStart(autoStart);
 
-    settingsInfo.setShowSettings(false);
+    //settingsInfo.setShowSettings(false);
   }
 
   useEffect(() => {
     console.log("re-rendered");
-  });
+    setReset(false);
+  }, [reset]);
 
   return (
     <div style={{ textAlign: "left" }}>
-      <div>
+      <Link to="/">
         <BackButton onClick={() => settingsInfo.setShowSettings(false)} />
-      </div>
+      </Link>
       <ReactSliderComponent
         value={workMinutesRef.current}
         setValue={(e) => {
@@ -93,12 +96,22 @@ function Settings() {
         />
       </div>
       <div className="flex settings-btn-container">
-        <button className="btn-with-text" onClick={resetBtn}>
-          Reset
-        </button>
-        <button className="btn-with-text" onClick={applyBtn}>
-          Apply
-        </button>
+        <Link to="/settings">
+          <button
+            className="btn-with-text"
+            onClick={() => {
+              resetBtn();
+              setReset(true);
+            }}
+          >
+            Reset
+          </button>
+        </Link>
+        <Link to="/">
+          <button className="btn-with-text" onClick={applyBtn}>
+            Apply
+          </button>
+        </Link>
       </div>
     </div>
   );

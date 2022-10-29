@@ -3,6 +3,7 @@ import Timer from "./Timer";
 import Settings from "./Settings";
 import { useState } from "react";
 import SettingsContext from "./SettingsContext";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   const initialStates = {
@@ -23,6 +24,7 @@ function App() {
     initialStates.breakIntervals
   );
   const [autoStart, setAutoStart] = useState(initialStates.autoStart);
+  const [key, setKey] = useState(Math.random);
 
   return (
     <main>
@@ -41,9 +43,14 @@ function App() {
           initialStates,
           autoStart,
           setAutoStart,
+          setKey,
         }}
       >
-        {showSettings ? <Settings /> : <Timer />}
+        {/* {showSettings ? <Settings /> : <Timer />} */}
+        <Routes>
+          <Route path="/" element={<Timer />}></Route>
+          <Route path="/settings" element={<Settings key={key} />}></Route>
+        </Routes>
       </SettingsContext.Provider>
     </main>
   );
