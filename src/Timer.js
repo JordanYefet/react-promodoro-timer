@@ -4,7 +4,7 @@ import PlayButton from "./PlayButton";
 import PauseButton from "./PauseButton";
 import SettingsButton from "./SettingsButton";
 import ResetButton from "./ResetButton";
-import LongBreakIndicator from "./BreakIntervalsIndicator";
+import BreakIntervalsIndicator from "./BreakIntervalsIndicator";
 import { useContext, useState, useEffect, useRef } from "react";
 import SettingsContext from "./SettingsContext";
 import { Link } from "react-router-dom";
@@ -17,8 +17,8 @@ function Timer() {
   const [restart, setRestart] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
   const [mode, setMode] = useState("work"); // work/break/null
-  const [secondsLeft, setSecondsLeft] = useState(0);
-  //const [breakIntervalsDone, setBreakIntervalsDone] = useState(0); // filled yellow indicators
+  const [secondsLeft, setSecondsLeft] = useState(3);
+  const [breakIntervalsDone, setBreakIntervalsDone] = useState(0); // filled yellow indicators
   const secondsLeftRef = useRef(secondsLeft);
   const isPausedRef = useRef(isPaused);
   const modeRef = useRef(mode);
@@ -51,12 +51,12 @@ function Timer() {
         return;
       }
       if (secondsLeftRef.current === 0) {
+        setBreakIntervalsDone((breakIntervalsDone) => breakIntervalsDone + 1);
         return switchMode();
       }
 
       tick();
-    }, 1000);
-
+    }, 100);
     return () => clearInterval(interval);
   }, [settingsInfo]);
 
@@ -91,7 +91,7 @@ function Timer() {
             tailColor: "rgba(255,255,255,.2)",
           })}
         />
-        <LongBreakIndicator breakIntervalsDone setBreakIntervalsDone />
+        <BreakIntervalsIndicator breakIntervalsDone={breakIntervalsDone} />
       </div>
       <div style={{ marginTop: "20px" }}>
         {isPaused ? (

@@ -7,8 +7,8 @@ import { Route, Routes } from "react-router-dom";
 
 function App() {
   const initialStates = {
-    workMinutes: 45,
-    breakMinutes: 15,
+    workMinutes: 1,
+    breakMinutes: 1,
     longBreakMinutes: 30,
     breakIntervals: 4,
     autoStart: true,

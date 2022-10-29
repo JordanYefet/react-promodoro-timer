@@ -1,34 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import SettingsContext from "./SettingsContext";
 
-function BreakIntervalsIndicator() {
+function BreakIntervalsIndicator(props) {
   const settingsInfo = useContext(SettingsContext);
   const [indicatorList, setIndicatorList] = useState(
     [...Array(settingsInfo.breakIntervals).keys()].map((i) => i + 1)
   );
+  //const [breakIntervalsDone, setBreakIntervalsDone] = useState(2);
 
-  const currentBreak = 2;
-
-  function kl(list) {
+  function indicatorBuilder(list) {
     return list.map((index) => {
-      if (currentBreak >= index) {
+      const randKey = Math.round(Math.random() * 1000);
+      if (props.breakIntervalsDone >= index) {
         return (
           <div
-            key={index}
+            key={randKey}
             className="breakIntervalsIndicator breakIntervalsIndicatorFinished"
           ></div>
         );
       } else {
-        return <div key={index} className="breakIntervalsIndicator"></div>;
+        return <div key={randKey} className="breakIntervalsIndicator"></div>;
       }
     });
   }
 
   useEffect(() => {
-    setIndicatorList(kl(indicatorList));
-    console.log(indicatorList);
-  }, [settingsInfo.breakIntervals]);
+    setIndicatorList(indicatorBuilder(indicatorList));
+    console.log(props.breakIntervalsDone);
+  }, [props.breakIntervalsDone]);
 
   return (
     <div className="flex breakIntervalsIndicatorContainer">{indicatorList}</div>
