@@ -9,9 +9,10 @@ function BreakIntervalsIndicator(props) {
   //const [breakIntervalsDone, setBreakIntervalsDone] = useState(2);
 
   function indicatorBuilder(list) {
-    return list.map((index) => {
+    return list.map((_, index) => {
       const randKey = Math.round(Math.random() * 1000);
-      if (props.breakIntervalsDone >= index) {
+      console.log("index: " + index.index)
+      if (props.breakIntervalsDone.current >= index) {
         return (
           <div
             key={randKey}
@@ -26,8 +27,8 @@ function BreakIntervalsIndicator(props) {
 
   useEffect(() => {
     setIndicatorList(indicatorBuilder(indicatorList));
-    console.log(props.breakIntervalsDone);
-  }, [props.breakIntervalsDone]);
+    console.log(indicatorList);
+  }, [props.breakIntervalsDone.current]);
 
   return (
     <div className="flex breakIntervalsIndicatorContainer">{indicatorList}</div>

@@ -18,7 +18,7 @@ function Timer() {
   const [isPaused, setIsPaused] = useState(true);
   const [mode, setMode] = useState("work"); // work/break/null
   const [secondsLeft, setSecondsLeft] = useState(3);
-  const [breakIntervalsDone, setBreakIntervalsDone] = useState(0); // filled yellow indicators
+  const breakIntervalsDone = useRef(-1); // filled yellow indicators
   const secondsLeftRef = useRef(secondsLeft);
   const isPausedRef = useRef(isPaused);
   const modeRef = useRef(mode);
@@ -51,12 +51,15 @@ function Timer() {
         return;
       }
       if (secondsLeftRef.current === 0) {
-        setBreakIntervalsDone((breakIntervalsDone) => breakIntervalsDone + 1);
+        if (modeRef.current === "break" && breakIntervalsDone.current <= settingsInfo.breakIntervals){
+          console.log(breakIntervalsDone.current)
+          breakIntervalsDone.current = breakIntervalsDone.current + 1;
+        }
         return switchMode();
       }
 
       tick();
-    }, 100);
+    }, 1000);
     return () => clearInterval(interval);
   }, [settingsInfo]);
 

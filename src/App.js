@@ -10,7 +10,7 @@ function App() {
     workMinutes: 1,
     breakMinutes: 1,
     longBreakMinutes: 30,
-    breakIntervals: 4,
+    breakIntervals: 2,
     autoStart: true,
   };
 
