@@ -11,7 +11,7 @@ function App() {
     breakMinutes: 1,
     longBreakMinutes: 30,
     breakIntervals: 2,
-    autoStart: true,
+    autoStart: false,
   };
 
   const [showSettings, setShowSettings] = useState(false);

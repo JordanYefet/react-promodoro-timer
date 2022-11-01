@@ -13,7 +13,7 @@ export const ReactSliderComponent = React.memo((props) => {
 
   return (
     <>
-      <label>work: {value}:00</label>
+      <label>{props.label}: {value}:00</label>
       <ReactSlider
         className={`slider ${props.color}`}
         thumbClassName={"thumb"}

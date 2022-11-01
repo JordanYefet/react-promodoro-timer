@@ -51,15 +51,25 @@ function Timer() {
         return;
       }
       if (secondsLeftRef.current === 0) {
-        if (modeRef.current === "break" && breakIntervalsDone.current <= settingsInfo.breakIntervals){
-          console.log(breakIntervalsDone.current)
+        if(settingsInfo.autoStart){
+          setIsPaused(true);
+          isPausedRef.current = true;
+        }
+        if (modeRef.current === "break" && breakIntervalsDone.current < settingsInfo.breakIntervals){
           breakIntervalsDone.current = breakIntervalsDone.current + 1;
+          console.log(breakIntervalsDone)
+          console.log(settingsInfo.breakIntervals)
+        }
+        if(breakIntervalsDone.current >= settingsInfo.breakIntervals){
+          setIsPaused(true);
+          isPausedRef.current = true;
+          breakIntervalsDone.current = -1;
         }
         return switchMode();
       }
 
       tick();
-    }, 1000);
+    }, 30);
     return () => clearInterval(interval);
   }, [settingsInfo]);
 
@@ -112,10 +122,6 @@ function Timer() {
             }}
           />
         )}
-      </div>
-      <div>
-        <h1>Work Minutes: {settingsInfo.workMinutes}</h1>
-        <h1>Break Minutes: {settingsInfo.breakMinutes}</h1>
       </div>
     </div>
   );

@@ -6,7 +6,6 @@ function BreakIntervalsIndicator(props) {
   const [indicatorList, setIndicatorList] = useState(
     [...Array(settingsInfo.breakIntervals).keys()].map((i) => i + 1)
   );
-  //const [breakIntervalsDone, setBreakIntervalsDone] = useState(2);
 
   function indicatorBuilder(list) {
     return list.map((_, index) => {

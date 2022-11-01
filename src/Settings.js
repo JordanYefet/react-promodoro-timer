@@ -52,6 +52,7 @@ function Settings() {
         <BackButton onClick={() => settingsInfo.setShowSettings(false)} />
       </Link>
       <ReactSliderComponent
+        label="Work"
         value={workMinutesRef.current}
         setValue={(e) => {
           workMinutesRef.current = e;
@@ -61,6 +62,7 @@ function Settings() {
         max={120}
       />
       <ReactSliderComponent
+        label="Breaks"
         value={breakMinutesRef.current}
         setValue={(e) => {
           breakMinutesRef.current = e;
@@ -70,6 +72,7 @@ function Settings() {
         max={120}
       />
       <ReactSliderComponent
+        label="Long Break"
         value={longBreakMinutesRef.current}
         setValue={(e) => {
           longBreakMinutesRef.current = e;
@@ -79,6 +82,7 @@ function Settings() {
         max={120}
       />
       <ReactSliderComponent
+        label="Intervals"
         value={breakIntervalsRef.current}
         setValue={(e) => {
           breakIntervalsRef.current = e;
@@ -88,7 +92,7 @@ function Settings() {
         max={5}
       />
       <div className="flex auto-start">
-        <label>Auto break start?</label>
+        <label>Start breaks automatically</label>
         <input
           type="checkbox"
           checked={autoStart}
