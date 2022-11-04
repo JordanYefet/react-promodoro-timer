@@ -2,7 +2,7 @@
   --red: #f54e4e;
   --green: #4aec8c;
   --blue: #40a3ff;
-  --yellow: rgb(255, 255, 106);
+  --yellow: #ffff6a;
   --main-color: #30384b;
 }
 
@@ -38,6 +38,33 @@ main{
   justify-content: space-between;
 }
 
+.settings-btn{
+  width: 3rem;
+  height: 3rem;
+  padding: 3px;
+  transition: transform .2s ease-in-out;
+}
+
+.reset-btn{
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-top: 7px;
+  padding: 3px;
+  transition: transform .3s ease-in-out;
+}
+
+.back-btn{
+  width: 3rem;
+  height: 3rem;
+  padding: 3px;
+}
+
+.settings-reset-btns:hover{
+  -ms-transform: rotate(1.1); /* IE 9 */
+  -webkit-transform: rotate(1.1); /* Safari 3-8 */
+  transform: rotate(90deg);
+}
+
 button{
   background-color: transparent;
   color: rgba(255,255,255,0.8);
@@ -45,17 +72,6 @@ button{
   display: inline-block;
   width: 100px;
   cursor: pointer;
-}
-
-.settingsButton{
-  width: 3rem;
-  height: 3rem;
-}
-
-.resetButton{
-  width: 2.5rem;
-  height: 2.5rem;
-  padding-top: 7px;
 }
 
 button.btn-with-text{
@@ -111,5 +127,20 @@ h1{
 
 .breakIntervalsIndicatorFinished{
   background-color: var(--yellow);
+}
 
+.play-pause-btns{
+  transition: transform .1s ease-out;
+}
+
+.play-pause-btns:hover{
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.1);
+}
+
+.play-pause-btns:focus{
+  -ms-transform: scale(0.9); /* IE 9 */
+  -webkit-transform: scale(0.9); /* Safari 3-8 */
+  transform: scale(0.9);
 }

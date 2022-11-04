@@ -1,6 +1,6 @@
 function BackButton(props) {
   return (
-    <button {...props} className={"settingsButton"}>
+    <button {...props}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-5 w-5"

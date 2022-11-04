@@ -1,6 +1,6 @@
 function SettingsButton(props) {
   return (
-    <button {...props} className={"settingsButton"}>
+    <button {...props}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"

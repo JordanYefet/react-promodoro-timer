@@ -49,7 +49,10 @@ function Settings() {
   return (
     <div style={{ textAlign: "left" }}>
       <Link to="/">
-        <BackButton onClick={() => settingsInfo.setShowSettings(false)} />
+        <BackButton
+          className="back-btn"
+          onClick={() => settingsInfo.setShowSettings(false)}
+        />
       </Link>
       <ReactSliderComponent
         label="Work"

@@ -46,7 +46,6 @@ function App() {
           setKey,
         }}
       >
-        {/* {showSettings ? <Settings /> : <Timer />} */}
         <Routes>
           <Route path="/" element={<Timer />}></Route>
           <Route path="/settings" element={<Settings key={key} />}></Route>

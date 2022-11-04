@@ -18,12 +18,25 @@ function Timer() {
   const [restart, setRestart] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
   const [mode, setMode] = useState("work"); // work/break/null
-  const [secondsLeft, setSecondsLeft] = useState(3);
+  const [secondsLeft, setSecondsLeft] = useState(0);
+  const [isCacheMem, setIsCacheMeme] = useState(false);
   const [breakIntervalsDone, setBreakIntervalsDone] = useState(-1);
   const breakIntervalsDoneRef = useRef(-1); // filled yellow indicators
   const secondsLeftRef = useRef(secondsLeft);
   const isPausedRef = useRef(isPaused);
   const modeRef = useRef(mode);
+
+  /*   useEffect(() => {
+    setIsPaused(JSON.parse(window.localStorage.getItem("isPaused")));
+    setSecondsLeft(JSON.parse(window.localStorage.getItem("secondsLeft")));
+    isPausedRef.current = isPaused;
+    secondsLeftRef.current = secondsLeft;
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("isPaused", isPaused);
+    window.localStorage.setItem("secondsLeft", secondsLeft);
+  }, [isPaused, secondsLeft]); */
 
   function tick() {
     secondsLeftRef.current--;
@@ -32,8 +45,6 @@ function Timer() {
 
   useEffect(() => {
     function switchMode() {
-      //const nextMode = modeRef.current === "work" ? "break" : "work";
-      //debugger;
       let nextMode = "";
       if (modeRef.current === "work") {
         if (breakIntervalsDoneRef.current >= settingsInfo.breakIntervals - 1) {
@@ -41,16 +52,11 @@ function Timer() {
         } else nextMode = "break";
       } else nextMode = "work";
 
-      /*       const nextSeconds =
-        (nextMode === "work"
-          ? settingsInfo.workMinutes
-          : settingsInfo.breakMinutes) * 60; */
       let nextSeconds = 0;
       if (nextMode === "work") nextSeconds = settingsInfo.workMinutes * 60;
       else if (nextMode === "break")
         nextSeconds = settingsInfo.breakMinutes * 60;
       else nextSeconds = settingsInfo.longBreakMinutes * 60;
-      console.log(nextMode);
       setMode(nextMode);
       modeRef.current = nextMode;
 
@@ -77,9 +83,6 @@ function Timer() {
           breakIntervalsDoneRef.current = breakIntervalsDoneRef.current + 1;
           setBreakIntervalsDone((prevState) => prevState + 1);
         }
-        /*         if (breakIntervalsDoneRef.current === settingsInfo.breakIntervals) {
-          console.log("long break activated");
-        } */
         if (modeRef.current === "longBreak") {
           setIsPaused(true);
           isPausedRef.current = true;
@@ -90,14 +93,10 @@ function Timer() {
       }
 
       tick();
-    }, 50);
+    }, 1000);
     return () => clearInterval(interval);
   }, [settingsInfo]);
 
-  /*   const totalSeconds =
-    mode === "work"
-      ? settingsInfo.workMinutes * 60
-      : settingsInfo.breakMinutes * 60; */
   let totalSeconds = 0;
   if (mode === "work") {
     totalSeconds = settingsInfo.workMinutes * 60;
@@ -107,7 +106,6 @@ function Timer() {
     totalSeconds = settingsInfo.longBreakMinutes * 60;
   }
   const percentage = Math.round((secondsLeft / totalSeconds) * 100);
-  console.log(totalSeconds);
 
   const minutes = Math.floor(secondsLeft / 60);
   let seconds = secondsLeft % 60;
@@ -118,11 +116,14 @@ function Timer() {
       <div className="settings-container">
         <Link to="/settings">
           <SettingsButton
-            className="settings-btn"
+            className="settings-btn settings-reset-btns"
             onClick={() => settingsInfo.setShowSettings(true)}
           />
         </Link>
-        <ResetButton className="restart-btn" onClick={() => setRestart(true)} />
+        <ResetButton
+          className="reset-btn settings-reset-btns"
+          onClick={() => setRestart(true)}
+        />
       </div>
       <div className="CircularProgressbar">
         <CircularProgressbar
@@ -139,6 +140,7 @@ function Timer() {
       <div style={{ marginTop: "20px" }}>
         {isPaused ? (
           <PlayButton
+            className="play-pause-btns play-btn"
             onClick={() => {
               setIsPaused(false);
               isPausedRef.current = false;
@@ -146,6 +148,7 @@ function Timer() {
           />
         ) : (
           <PauseButton
+            className="play-pause-btns pause-btn"
             onClick={() => {
               setIsPaused(true);
               isPausedRef.current = true;
