@@ -9,8 +9,8 @@ function App() {
   const initialStates = {
     workMinutes: 1,
     breakMinutes: 1,
-    longBreakMinutes: 30,
-    breakIntervals: 2,
+    longBreakMinutes: 1,
+    breakIntervals: 1,
     autoStart: false,
   };
 

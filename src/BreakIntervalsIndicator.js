@@ -7,11 +7,12 @@ function BreakIntervalsIndicator(props) {
     [...Array(settingsInfo.breakIntervals).keys()].map((i) => i + 1)
   );
 
+  //A better approach is to build an array of empty indicators
+  //and then fill them one by one, instead of creating the whole list over and over again
   function indicatorBuilder(list) {
     return list.map((_, index) => {
       const randKey = Math.round(Math.random() * 1000);
-      console.log("index: " + index.index)
-      if (props.breakIntervalsDone.current >= index) {
+      if (props.breakIntervalsDone >= index) {
         return (
           <div
             key={randKey}
@@ -26,8 +27,7 @@ function BreakIntervalsIndicator(props) {
 
   useEffect(() => {
     setIndicatorList(indicatorBuilder(indicatorList));
-    console.log(indicatorList);
-  }, [props.breakIntervalsDone.current]);
+  }, [props.breakIntervalsDone]);
 
   return (
     <div className="flex breakIntervalsIndicatorContainer">{indicatorList}</div>
