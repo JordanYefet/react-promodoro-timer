@@ -8,10 +8,10 @@ import { AnimatePresence } from "framer-motion/dist/framer-motion";
 
 function App() {
   const initialStates = {
-    workMinutes: 1,
-    breakMinutes: 1,
-    longBreakMinutes: 1,
-    breakIntervals: 1,
+    workMinutes: 30,
+    breakMinutes: 5,
+    longBreakMinutes: 30,
+    breakIntervals: 4,
     autoStart: false,
   };
 
@@ -48,7 +48,7 @@ function App() {
           setKey,
         }}
       >
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence mode="wait">
           <Routes key={location.pathname} location={location}>
             <Route path="/" element={<Timer />}></Route>
             <Route path="/settings" element={<Settings key={key} />}></Route>

@@ -20,7 +20,7 @@ function AnimatedPage({ page, children }) {
       initial="initial"
       animate="animate"
       exit="exit"
-      transition={{ duration: 0.4 }}
+      //transition={{ duration: 1 }}
     >
       {children}
     </motion.div>
