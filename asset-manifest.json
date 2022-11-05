@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/react-promodoro-timer/static/css/main.2a85a628.chunk.css",
+    "main.js": "/react-promodoro-timer/static/js/main.a6f03e93.chunk.js",
+    "main.js.map": "/react-promodoro-timer/static/js/main.a6f03e93.chunk.js.map",
+    "runtime-main.js": "/react-promodoro-timer/static/js/runtime-main.29f8db7c.js",
+    "runtime-main.js.map": "/react-promodoro-timer/static/js/runtime-main.29f8db7c.js.map",
+    "static/css/2.6c0f60ba.chunk.css": "/react-promodoro-timer/static/css/2.6c0f60ba.chunk.css",
+    "static/js/2.c62adf64.chunk.js": "/react-promodoro-timer/static/js/2.c62adf64.chunk.js",
+    "static/js/2.c62adf64.chunk.js.map": "/react-promodoro-timer/static/js/2.c62adf64.chunk.js.map",
+    "static/js/3.aa0cd2ed.chunk.js": "/react-promodoro-timer/static/js/3.aa0cd2ed.chunk.js",
+    "static/js/3.aa0cd2ed.chunk.js.map": "/react-promodoro-timer/static/js/3.aa0cd2ed.chunk.js.map",
+    "index.html": "/react-promodoro-timer/index.html",
+    "static/css/2.6c0f60ba.chunk.css.map": "/react-promodoro-timer/static/css/2.6c0f60ba.chunk.css.map",
+    "static/css/main.2a85a628.chunk.css.map": "/react-promodoro-timer/static/css/main.2a85a628.chunk.css.map",
+    "static/js/2.c62adf64.chunk.js.LICENSE.txt": "/react-promodoro-timer/static/js/2.c62adf64.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.29f8db7c.js",
+    "static/css/2.6c0f60ba.chunk.css",
+    "static/js/2.c62adf64.chunk.js",
+    "static/css/main.2a85a628.chunk.css",
+    "static/js/main.a6f03e93.chunk.js"
+  ]
+}
