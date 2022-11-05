@@ -144,19 +144,10 @@ h1{
 }
 
 
-
-.play-pause-btns:focus{
-  -ms-transform: scale(0.9); /* IE 9 */
-  -webkit-transform: scale(0.9); /* Safari 3-8 */
-  transform: scale(0.9);
-  outline: 0;
-  box-shadow: none;
-}
-
 @media (hover: hover) {
   .settings-reset-btns:hover{
-    -ms-transform: rotate(1.1); /* IE 9 */
-    -webkit-transform: rotate(1.1); /* Safari 3-8 */
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Safari 3-8 */
     transform: rotate(90deg);
   }
   
@@ -164,9 +155,16 @@ h1{
     background-color: rgba(255, 255, 255, 0.685);
     color: var(--main-color)
   }
-  .play-pause-btns:hover{
-    -ms-transform: scale(1.1); /* IE 9 */
-    -webkit-transform: scale(1.1); /* Safari 3-8 */
+/*   .play-pause-btns:hover{
+    -ms-transform: scale(1.1); 
+    -webkit-transform: scale(1.1); 
     transform: scale(1.1);
+  } */
+  .play-pause-btns:focus{
+    -ms-transform: scale(0.9); /* IE 9 */
+    -webkit-transform: scale(0.9); /* Safari 3-8 */
+    transform: scale(0.9);
+    outline: 0;
+    box-shadow: none;
   }
 }
