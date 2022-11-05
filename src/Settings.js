@@ -4,6 +4,7 @@ import React, { useContext, useState, useRef, useEffect } from "react";
 import BackButton from "./BackButton";
 import ReactSliderComponent from "./ReactSliderComponent";
 import { Link } from "react-router-dom";
+import AnimatedPage from "./AnimatedPage";
 
 function Settings() {
   const settingsInfo = useContext(SettingsContext);
@@ -47,80 +48,82 @@ function Settings() {
   }, [reset]);
 
   return (
-    <div style={{ textAlign: "left" }}>
-      <Link to="/">
-        <BackButton
-          className="back-btn"
-          onClick={() => settingsInfo.setShowSettings(false)}
-        />
-      </Link>
-      <ReactSliderComponent
-        label="Work"
-        value={workMinutesRef.current}
-        setValue={(e) => {
-          workMinutesRef.current = e;
-        }}
-        color=""
-        min={1}
-        max={120}
-      />
-      <ReactSliderComponent
-        label="Breaks"
-        value={breakMinutesRef.current}
-        setValue={(e) => {
-          breakMinutesRef.current = e;
-        }}
-        color="green"
-        min={1}
-        max={120}
-      />
-      <ReactSliderComponent
-        label="Long Break"
-        value={longBreakMinutesRef.current}
-        setValue={(e) => {
-          longBreakMinutesRef.current = e;
-        }}
-        color="blue"
-        min={1}
-        max={120}
-      />
-      <ReactSliderComponent
-        label="Intervals"
-        value={breakIntervalsRef.current}
-        setValue={(e) => {
-          breakIntervalsRef.current = e;
-        }}
-        color="yellow"
-        min={1}
-        max={5}
-      />
-      <div className="flex auto-start">
-        <label>Start breaks automatically</label>
-        <input
-          type="checkbox"
-          checked={autoStart}
-          onChange={() => setAutoStart(!autoStart)}
-        />
-      </div>
-      <div className="flex settings-btn-container">
-        <Link to="/settings">
-          <button
-            className="btn-with-text"
-            onClick={() => {
-              resetBtn();
-              setReset(true);
-            }}
-          >
-            Reset
-          </button>
-        </Link>
+    <AnimatedPage page="settings">
+      <div style={{ textAlign: "left" }}>
         <Link to="/">
-          <button className="btn-with-text" onClick={applyBtn}>
-            Apply
-          </button>
+          <BackButton
+            className="back-btn"
+            onClick={() => settingsInfo.setShowSettings(false)}
+          />
         </Link>
+        <ReactSliderComponent
+          label="Work"
+          value={workMinutesRef.current}
+          setValue={(e) => {
+            workMinutesRef.current = e;
+          }}
+          color=""
+          min={1}
+          max={120}
+        />
+        <ReactSliderComponent
+          label="Breaks"
+          value={breakMinutesRef.current}
+          setValue={(e) => {
+            breakMinutesRef.current = e;
+          }}
+          color="green"
+          min={1}
+          max={120}
+        />
+        <ReactSliderComponent
+          label="Long Break"
+          value={longBreakMinutesRef.current}
+          setValue={(e) => {
+            longBreakMinutesRef.current = e;
+          }}
+          color="blue"
+          min={1}
+          max={120}
+        />
+        <ReactSliderComponent
+          label="Intervals"
+          value={breakIntervalsRef.current}
+          setValue={(e) => {
+            breakIntervalsRef.current = e;
+          }}
+          color="yellow"
+          min={1}
+          max={5}
+        />
+        <div className="flex auto-start">
+          <label>Start breaks automatically</label>
+          <input
+            type="checkbox"
+            checked={autoStart}
+            onChange={() => setAutoStart(!autoStart)}
+          />
+        </div>
+        <div className="flex settings-btn-container">
+          <Link to="/settings">
+            <button
+              className="btn-with-text"
+              onClick={() => {
+                resetBtn();
+                setReset(true);
+              }}
+            >
+              Reset
+            </button>
+          </Link>
+          <Link to="/">
+            <button className="btn-with-text" onClick={applyBtn}>
+              Apply
+            </button>
+          </Link>
+        </div>
       </div>
-    </div>
+    </AnimatedPage>
   );
 }
 

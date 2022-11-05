@@ -8,6 +8,7 @@ import BreakIntervalsIndicator from "./BreakIntervalsIndicator";
 import { useContext, useState, useEffect, useRef } from "react";
 import SettingsContext from "./SettingsContext";
 import { Link } from "react-router-dom";
+import AnimatedPage from "./AnimatedPage";
 
 const colors = {
   red: "#f54e4e",
@@ -132,56 +133,58 @@ function Timer() {
   if (seconds < 10) seconds = "0" + seconds;
 
   return (
-    <div>
-      <div className="settings-container">
-        <Link to="/settings">
-          <SettingsButton
-            className="settings-btn settings-reset-btns"
-            onClick={() => settingsInfo.setShowSettings(true)}
+    <AnimatedPage page="timer">
+      <div>
+        <div className="settings-container">
+          <Link to="/settings">
+            <SettingsButton
+              className="settings-btn settings-reset-btns"
+              onClick={() => settingsInfo.setShowSettings(true)}
+            />
+          </Link>
+          <ResetButton
+            className="reset-btn settings-reset-btns"
+            onClick={() => setRestart(true)}
           />
-        </Link>
-        <ResetButton
-          className="reset-btn settings-reset-btns"
-          onClick={() => setRestart(true)}
-        />
-      </div>
-      <div className="CircularProgressbar">
-        <CircularProgressbar
-          value={percentage}
-          text={minutes + ":" + seconds}
-          styles={buildStyles({
-            textColor: "#fff",
-            pathColor:
-              mode === "work"
-                ? colors.red
-                : mode === "break"
-                ? colors.green
-                : colors.blue,
-            tailColor: "rgba(255,255,255,.2)",
-          })}
-        />
-        <BreakIntervalsIndicator breakIntervalsDone={breakIntervalsDone} />
-      </div>
-      <div style={{ marginTop: "20px" }}>
-        {isPaused ? (
-          <PlayButton
-            className="play-pause-btns play-btn"
-            onClick={() => {
-              setIsPaused(false);
-              isPausedRef.current = false;
-            }}
+        </div>
+        <div className="CircularProgressbar">
+          <CircularProgressbar
+            value={percentage}
+            text={minutes + ":" + seconds}
+            styles={buildStyles({
+              textColor: "#fff",
+              pathColor:
+                mode === "work"
+                  ? colors.red
+                  : mode === "break"
+                  ? colors.green
+                  : colors.blue,
+              tailColor: "rgba(255,255,255,.2)",
+            })}
           />
-        ) : (
-          <PauseButton
-            className="play-pause-btns pause-btn"
-            onClick={() => {
-              setIsPaused(true);
-              isPausedRef.current = true;
-            }}
-          />
-        )}
+          <BreakIntervalsIndicator breakIntervalsDone={breakIntervalsDone} />
+        </div>
+        <div style={{ marginTop: "20px" }}>
+          {isPaused ? (
+            <PlayButton
+              className="play-pause-btns play-btn"
+              onClick={() => {
+                setIsPaused(false);
+                isPausedRef.current = false;
+              }}
+            />
+          ) : (
+            <PauseButton
+              className="play-pause-btns pause-btn"
+              onClick={() => {
+                setIsPaused(true);
+                isPausedRef.current = true;
+              }}
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </AnimatedPage>
   );
 }
 

@@ -3,7 +3,8 @@ import Timer from "./Timer";
 import Settings from "./Settings";
 import { useState } from "react";
 import SettingsContext from "./SettingsContext";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion/dist/framer-motion";
 
 function App() {
   const initialStates = {
@@ -25,6 +26,7 @@ function App() {
   );
   const [autoStart, setAutoStart] = useState(initialStates.autoStart);
   const [key, setKey] = useState(Math.random);
+  const location = useLocation();
 
   return (
     <main>
@@ -46,10 +48,12 @@ function App() {
           setKey,
         }}
       >
-        <Routes>
-          <Route path="/" element={<Timer />}></Route>
-          <Route path="/settings" element={<Settings key={key} />}></Route>
-        </Routes>
+        <AnimatePresence exitBeforeEnter>
+          <Routes key={location.pathname} location={location}>
+            <Route path="/" element={<Timer />}></Route>
+            <Route path="/settings" element={<Settings key={key} />}></Route>
+          </Routes>
+        </AnimatePresence>
       </SettingsContext.Provider>
     </main>
   );
