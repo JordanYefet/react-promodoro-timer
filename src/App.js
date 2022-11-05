@@ -3,7 +3,13 @@ import Timer from "./Timer";
 import Settings from "./Settings";
 import { useState } from "react";
 import SettingsContext from "./SettingsContext";
-import { Route, Routes, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Router,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import { AnimatePresence } from "framer-motion/dist/framer-motion";
 
 function App() {
@@ -27,6 +33,7 @@ function App() {
   const [autoStart, setAutoStart] = useState(initialStates.autoStart);
   const [key, setKey] = useState(Math.random);
   const location = useLocation();
+  // do not put a slash at the end of the basename value.
 
   return (
     <main>
