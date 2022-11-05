@@ -59,10 +59,15 @@ main{
   padding: 3px;
 }
 
-.settings-reset-btns:hover{
+.settings-reset-btns:hover, .settings-reset-btns:active{
   -ms-transform: rotate(1.1); /* IE 9 */
   -webkit-transform: rotate(1.1); /* Safari 3-8 */
   transform: rotate(90deg);
+}
+
+.settings-reset-btns:focus{
+  outline: 0;
+  box-shadow: none;
 }
 
 button{
@@ -88,9 +93,14 @@ button.btn-with-text{
   -webkit-transition-timing-function: linear;
 }
 
-button.btn-with-text:hover{
+button.btn-with-text:hover, button.btn-with-text:active{
   background-color: rgba(255, 255, 255, 0.685);
   color: var(--main-color)
+}
+
+button.btn-with-text:focus{
+  outline: 0;
+  box-shadow: none;
 }
 
 label{
@@ -133,14 +143,16 @@ h1{
   transition: transform .1s ease-out;
 }
 
-.play-pause-btns:hover{
+.play-pause-btns:hover, .play-pause-btns:active{
   -ms-transform: scale(1.1); /* IE 9 */
   -webkit-transform: scale(1.1); /* Safari 3-8 */
   transform: scale(1.1);
 }
 
-.play-pause-btns:focus{
+.play-pause-btns:focus, .play-pause-btns:active{
   -ms-transform: scale(0.9); /* IE 9 */
   -webkit-transform: scale(0.9); /* Safari 3-8 */
   transform: scale(0.9);
+  outline: 0;
+  box-shadow: none;
 }
